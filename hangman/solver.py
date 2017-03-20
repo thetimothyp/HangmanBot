@@ -11,7 +11,7 @@ class HangmanSolver:
     def prune_word_list(self, word_list):
         return [word for word in word_list if len(word) == self.word_length]
 
-    def make_guess(self):
+    def make_guess(self, guessed):
         raise NotImplementedError("This method is not implemented")
 
 
@@ -24,11 +24,11 @@ class ProbabilityBruteForceFrequencies(HangmanSolver):
         super().__init__(word_list, game)
         self.freq = self.get_frequencies()
 
-    def make_guess(self):
+    def make_guess(self, guessed):
         guess = self.weighted_choice(self.freq)
-        while guess in self.game.state['guessed']:
+        while guess in guessed:
             guess = self.weighted_choice(self.freq)
-        self.game.process_letter_guess(guess)
+        return guess
 
     def get_frequencies(self):
         freq = collections.defaultdict(int)
@@ -58,11 +58,11 @@ class BruteForceFrequencies(HangmanSolver):
         super().__init__(word_list, game)
         self.freq = self.get_frequencies()
 
-    def make_guess(self):
+    def make_guess(self, guessed):
         guess = self.get_max()
-        while guess in self.game.state['guessed']:
+        while guess in guessed:
             guess = self.get_max()
-        self.game.process_letter_guess(guess)
+        return guess
 
     def get_frequencies(self):
         freq = collections.defaultdict(int)
@@ -87,12 +87,12 @@ class ProbabilityPatternMatching(HangmanSolver):
         super().__init__(word_list, game)
         self.freq = self.get_frequencies()
 
-    def make_guess(self):
+    def make_guess(self, guessed):
         self.update_frequencies()
         guess = self.weighted_choice(self.freq)
-        while guess in self.game.state['guessed']:
+        while guess in guessed:
             guess = self.weighted_choice(self.freq)
-        self.game.process_letter_guess(guess)
+        return guess
 
     def update_frequencies(self):
         cur = ''.join(self.game.state['state'])
@@ -131,12 +131,12 @@ class PatternMatching(HangmanSolver):
         super().__init__(word_list, game)
         self.freq = self.get_frequencies()
 
-    def make_guess(self):
+    def make_guess(self, guessed):
         self.update_frequencies()
         guess = self.get_max()
-        while guess in self.game.state['guessed']:
+        while guess in guessed:
             guess = self.get_max()
-        self.game.process_letter_guess(guess)
+        return guess
 
     def update_frequencies(self):
         cur = ''.join(self.game.state['state'])

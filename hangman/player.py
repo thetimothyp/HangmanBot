@@ -31,7 +31,9 @@ class HangmanPlayer:
         s = solver_class(self.g.words, self.game)
         self.reset_game()
         while not self.game.game_over():
-            s.make_guess()
+            guessed = self.game.state['guessed']
+            guess = s.make_guess(guessed)
+            self.game.process_letter_guess(guess)
         return solver_class, self.game.get_state()
 
     def report_solver_results(self, solver_class, result):
