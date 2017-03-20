@@ -38,9 +38,7 @@ class AtoZ(HangmanSolver):
   def make_guess(self, guessed, state):
     # Get the next letter from self.guesses
     guess = next(self.guesses)
-    
-    # Tell our game to process this guess
-    self.game.process_letter_guess(guess)
+    return guess
 ```
 And that's it! Not exactly the smartest bot in the world, but it tries.
 
