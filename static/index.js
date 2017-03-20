@@ -57,7 +57,7 @@ $(function(){
 	})
 
 	$("#guess").on('click', () => {
-		let letter_val = $("#letter").val()
+		let letter_val = $("#letter").val().toLowerCase()
 		$("#letter").val('')
 		socket.emit('letter_guess', letter_val)
 		fade_loader('in')
