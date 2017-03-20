@@ -29,10 +29,9 @@ For example, if we want to create a simple bot that will guess the letters from 
 ```
 class AtoZ(HangmanSolver):
   def __init__(self, word_list, word_length):
-    # Call superclass's constructor for word_list (all words in dictionary) and word_length (length of target word)
     super().__init__(word_list, word_length)
     
-    # Create iterator from A to Z!
+    # Create iterator from A to Z
     self.guesses = iter(string.ascii_lowercase)
   
   def make_guess(self, guessed, state):
