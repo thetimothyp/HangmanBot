@@ -13,7 +13,6 @@ db = mongo['hangman-bot']
 bots = db['bot-statistics']
 
 port = int(os.environ.get("PORT", 5000))
-app.config['SERVER_NAME'] = '127.0.0.1:{}'.format(port)
 
 
 @app.route('/')
