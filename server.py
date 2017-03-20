@@ -7,7 +7,7 @@ from hangman import player
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 socketio = SocketIO(app)
-mongo = MongoClient('mongodb://admin:password@ds137090.mlab.com:37090/hangman-bot')
+mongo = MongoClient('mongodb://admin:hangmanbotkghjkhj@ds137090.mlab.com:37090/hangman-bot')
 p = player.HangmanPlayer()
 db = mongo['hangman-bot']
 bots = db['bot-statistics']
@@ -54,4 +54,4 @@ def update_bot_stats(results):
 if __name__ == '__main__':
     socketio.run(app)
     port = int(os.environ.get("PORT", 5000))
-    app.run(host='127.0.0.1', port=port)
+    app.run(host='0.0.0.0', port=port)
