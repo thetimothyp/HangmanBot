@@ -28,7 +28,7 @@ For example, if we want to create a simple bot that will guess the letters from 
 class AtoZ(HangmanSolver):
   def __init__(self, word_list, game):
     super().__init__(word_list, game)
-    self.guesses = (l for l in string.ascii_lowercase)
+    self.guesses = iter(string.ascii_lowercase)
   
   def make_guess(self):
     # Get the next letter from self.guesses
