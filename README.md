@@ -19,23 +19,26 @@ local machine.
 
 ## Creating a bot
 Creating a hangman-solving bot happens in `hangman/solver.py`. If you want to make a bot,
-it's as easy as defining a subclass of `HangmanSolver` and implementing the `make_guess()` method.
-Every solver instance has a game attached to it, so you'll need to have the game process your guess
-at the end of your `make_guess()` implementation. 
+it's as easy as defining a subclass of `HangmanSolver` and implementing the `make_guess(guessed, state)` method, 
+where `guessed` is a list of letters that have already been guessed and `state` is the known domain of the word (e.g if 
+"abc" is the target word, then `state == ['_', 'b', '_']` after guessing "b"). You can use this information when designing
+your bot; additionally, if you want to process the entire dictionary of words to improve your heuristic, it can be accessed
+in `self.word_list`.
 
 For example, if we want to create a simple bot that will guess the letters from A to Z, we would define a class like the following:
 ```
 class AtoZ(HangmanSolver):
-  def __init__(self, word_list, game):
-    super().__init__(word_list, game)
+  def __init__(self, word_list, word_length):
+    # Call superclass's constructor for word_list (all words in dictionary) and word_length (length of target word)
+    super().__init__(word_list, word_length)
+    
+    # Create iterator from A to Z!
     self.guesses = iter(string.ascii_lowercase)
   
-  def make_guess(self):
+  def make_guess(self, guessed, state):
     # Get the next letter from self.guesses
     guess = next(self.guesses)
-    
-    # Tell our game to process this guess
-    self.game.process_letter_guess(guess)
+    return guess
 ```
 And that's it! Not exactly the smartest bot in the world, but it tries.
 
