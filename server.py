@@ -12,6 +12,9 @@ p = player.HangmanPlayer()
 db = mongo['hangman-bot']
 bots = db['bot-statistics']
 
+port = int(os.environ.get("PORT", 5000))
+app.config['SERVER_NAME'] = '127.0.0.1:{}'.format(port)
+
 
 @app.route('/')
 def render_page():
@@ -53,5 +56,6 @@ def update_bot_stats(results):
 
 if __name__ == '__main__':
     socketio.run(app)
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    # port = int(os.environ.get("PORT", 5000))
+    # console.log(os.environ.get("PORT"))
+    # app.run(host='0.0.0.0', port=port)
