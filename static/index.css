@@ -1,0 +1,70 @@
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+.vertical-center {
+	min-height: 90%;  /* Fallback for browsers do NOT support vh unit */
+  	min-height: 90vh; /* These two lines are counted as one :-)       */
+
+  	display: flex;
+  	align-items: center;
+}
+
+.play-area {
+	text-align: center;
+	margin: 0 auto;
+}
+
+#play-field {
+	margin: 20px;
+}
+
+.footer {
+	text-align: center;
+	color: gray;
+}
+
+a {
+	color: #5998ff;
+}
+
+a, a:hover, a:active, a:visited, a:focus {
+	text-decoration: none;
+	transition: color 0.5s;
+}
+
+h5 {
+	color: #777777;
+}
+
+button {
+	padding: 2px 6px;
+	border: 0.5px solid #999;
+	background: none;
+	transition: background 0.5s, color 0.5s, border-color 0.5s;
+}
+
+input:focus {
+	outline: 0;
+}
+
+button:hover {
+	background: #444;
+	color: white;
+	border-color: #444;
+}
+
+button:focus {
+	outline: 0;
+}
+
+button:active {
+	background: black;
+}
+
+button:disabled {
+	background: none;
+	color: #ddd;
+	border-color: #ddd;
+}
