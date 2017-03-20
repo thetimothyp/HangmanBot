@@ -1,6 +1,6 @@
 $(function(){
-	const socket = io.connect('http://127.0.0.1:5000');
-	// const socket = io.connect($(location).attr('href'));
+	// const socket = io.connect('http://127.0.0.1:5000');
+	const socket = io.connect($(location).attr('href'));
 
 	const display_word = (word) => {
 		$("#play-field").text(word.split('').join(' '))
