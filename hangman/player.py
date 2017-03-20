@@ -6,7 +6,7 @@ SOLVERS = (
     solver.ProbabilityBruteForceFrequencies,
     solver.BruteForceFrequencies,
     solver.ProbabilityPatternMatching,
-    solver.PatternMatching
+    solver.PatternMatching,
 )
 
 
@@ -28,11 +28,12 @@ class HangmanPlayer:
         return [self.run_with_solver(s) for s in solvers]
 
     def run_with_solver(self, solver_class):
-        s = solver_class(self.g.words, self.game)
+        s = solver_class(self.g.words, len(self.game.word))
         self.reset_game()
         while not self.game.game_over():
             guessed = self.game.state['guessed']
-            guess = s.make_guess(guessed)
+            state = self.game.state['state']
+            guess = s.make_guess(guessed, state)
             self.game.process_letter_guess(guess)
         return solver_class, self.game.get_state()
 
