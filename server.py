@@ -4,10 +4,17 @@ from flask_socketio import SocketIO, send, emit
 from flask_pymongo import MongoClient
 from hangman import player
 
+def get_cred():
+	pw = ''
+	with open('hangman.config', 'r') as f:
+		pw = f.readline().strip()
+	return pw
+
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 socketio = SocketIO(app)
-mongo = MongoClient('mongodb://admin:pw@ds137090.mlab.com:37090/hangman-bot')
+pw = get_cred()
+mongo = MongoClient('mongodb://admin:' + pw + '@ds137090.mlab.com:37090/hangman-bot')
 p = player.HangmanPlayer()
 db = mongo['hangman-bot']
 bots = db['bot-statistics']
