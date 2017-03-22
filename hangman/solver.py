@@ -1,5 +1,4 @@
 import collections, re, random, bisect
-from hangman import generator
 
 
 class HangmanSolver:

@@ -1,5 +1,6 @@
 from hangman import generator, solver
 import collections
+# import generator, solver
 
 
 SOLVERS = (

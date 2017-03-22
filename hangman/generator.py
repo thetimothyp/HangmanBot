@@ -5,6 +5,7 @@ from the list.
 """
 import random
 from hangman import game
+# import game
 
 
 class HangmanGenerator:

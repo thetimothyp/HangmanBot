@@ -1,6 +1,6 @@
 $(function(){
-	// const socket = io.connect('http://127.0.0.1:5000');
-	const socket = io.connect($(location).attr('href'));
+	const socket = io.connect('http://127.0.0.1:5000');
+	// const socket = io.connect($(location).attr('href'));
 
 	const display_word = (word) => {
 		$("#play-field").text(word.split('').join(' '))
@@ -49,6 +49,13 @@ $(function(){
 	socket.on('processed', (flag) => {
 		fade_loader('out')
 		$("#guess").prop("disabled", false)
+	})
+
+	socket.on('new_game', (data) => {
+		data = JSON.parse(data);
+		g = new Game(data['word'], data['max_guesses']);
+		s = new CustomSolver(data['word_length'], data['word_list']);
+		console.log(g.run_with_solver(s));
 	})
 
 	$("#play").on('click', () => {

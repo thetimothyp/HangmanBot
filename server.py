@@ -24,6 +24,12 @@ def render_page():
 def play_game(msg):
 	p.start_new_game()
 	emit('game_state', json.dumps(p.game.get_state()))
+	emit('new_game', json.dumps({
+		'word': p.game.word,
+		'word_length': len(p.game.word),
+		'max_guesses': p.game.guesses,
+		'word_list': [w for w in p.g.words if len(w) == len(p.game.word)]
+		}))
 
 
 @socketio.on('letter_guess')
