@@ -44,21 +44,10 @@
       <!-- Modal content -->
       <div class="modal-content">
         <div id="editor">
-class CustomSolver extends Solver {
-  /* 
-    Your make_guess() method should return a single letter guess.
-    Feel free to define any helper methods you need to.
-   */
-  constructor(word_length, word_list) {
-    super(word_length, word_list);
-    /* Initialize any instance variables you need to here */
-  }
-
-  make_guess(guessed, state) {
-    /* Implement your make_guess method here */
-    return '_';
-  }
-}
+/* Implement your make_guess method here */
+(function(){
+    return 'a';
+}())
         </div>
         <button id="confirm-code">OKAY</button>
       </div>
@@ -72,10 +61,5 @@ class CustomSolver extends Solver {
     <script src="{{url_for('static', filename='solver.js')}}"></script>
     <script src="{{url_for('static', filename='game.js')}}"></script>
     <script src="{{url_for('static', filename='index.js')}}"></script>
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/github");
-        editor.getSession().setMode("ace/mode/javascript");
-    </script>
   </body>
 </html>

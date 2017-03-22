@@ -1,8 +1,12 @@
 $(function(){
 	const socket = io.connect('http://127.0.0.1:5000');
+	const editor = ace.edit("editor");
+    editor.setTheme("ace/theme/clouds");
+    editor.getSession().setMode("ace/mode/javascript");
 	// const socket = io.connect($(location).attr('href'));
 
 	let userBot;
+	let game;
 
 	const display_word = (word) => {
 		$("#play-field").text(word.split('').join(' '))
@@ -17,7 +21,7 @@ $(function(){
 	}
 
 	const prettyprint = (results) => {
-		return results.join('<br/><br/>') + '<br/><br/>' + userBot;
+		return results.join('<br/><br/>') + '<br/><br/>' + game.results;
 	}
 
 	const fade_loader = (dir) => {
@@ -55,9 +59,12 @@ $(function(){
 
 	socket.on('new_game', (data) => {
 		data = JSON.parse(data);
-		g = new Game(data['word'], data['max_guesses']);
+		game = new Game(data['word'], data['max_guesses']);
 		s = new CustomSolver(data['word_length'], data['word_list']);
-		userBot = g.run_with_solver(s);
+		s.make_guess = (guessed, state) => {
+			return eval(userBot);
+		}
+		game.run_with_solver(s);
 	})
 
 	$("#play").on('click', () => {
@@ -77,7 +84,8 @@ $(function(){
 		$("#myModal").css('display', 'block');
 	})
 
-	$(".close").on('click', () => {
+	$("#confirm-code").on('click', () => {
+		userBot = editor.getValue();
 		$("#myModal").css('display', 'none');
 	})
 
