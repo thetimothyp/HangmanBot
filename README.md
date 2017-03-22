@@ -70,7 +70,7 @@ your bot; additionally, if you want to process the entire dictionary of words to
 in `self.word_list`.
 
 For example, if we want to create a simple bot that will guess the letters from A to Z, we would define a class like the following:
-```
+```python
 class AtoZ(HangmanSolver):
   def __init__(self, word_list, word_length):
     super().__init__(word_list, word_length)
