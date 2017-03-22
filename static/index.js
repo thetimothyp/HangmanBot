@@ -2,6 +2,8 @@ $(function(){
 	const socket = io.connect('http://127.0.0.1:5000');
 	// const socket = io.connect($(location).attr('href'));
 
+	let userBot;
+
 	const display_word = (word) => {
 		$("#play-field").text(word.split('').join(' '))
 	}
@@ -15,7 +17,7 @@ $(function(){
 	}
 
 	const prettyprint = (results) => {
-		return results.join('<br/><br/>')
+		return results.join('<br/><br/>') + '<br/><br/>' + userBot;
 	}
 
 	const fade_loader = (dir) => {
@@ -55,7 +57,7 @@ $(function(){
 		data = JSON.parse(data);
 		g = new Game(data['word'], data['max_guesses']);
 		s = new CustomSolver(data['word_length'], data['word_list']);
-		console.log(g.run_with_solver(s));
+		userBot = g.run_with_solver(s);
 	})
 
 	$("#play").on('click', () => {
@@ -69,6 +71,14 @@ $(function(){
 		socket.emit('letter_guess', letter_val)
 		fade_loader('in')
 		$("#guess").prop("disabled", true)
+	})
+
+	$("#modal-btn").on('click', () => {
+		$("#myModal").css('display', 'block');
+	})
+
+	$(".close").on('click', () => {
+		$("#myModal").css('display', 'none');
 	})
 
 })

@@ -31,17 +31,51 @@
     		<h4 id="win-status"></h4><br/>
     		<h5 id="solver-results"></h5>
         <div class="loading"></div>
+        <button id="modal-btn">Write a Bot</button>
     	</div>
     </div>
     <div class="footer">
       <a target="_blank" href="https://github.com/timothsp/HangmanBot">github</a>
     </div>
 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div id="editor">
+class CustomSolver extends Solver {
+  /* 
+    Your make_guess() method should return a single letter guess.
+    Feel free to define any helper methods you need to.
+   */
+  constructor(word_length, word_list) {
+    super(word_length, word_list);
+    /* Initialize any instance variables you need to here */
+  }
+
+  make_guess(guessed, state) {
+    /* Implement your make_guess method here */
+    return '_';
+  }
+}
+        </div>
+        <button id="confirm-code">OKAY</button>
+      </div>
+
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js"></script>
     <script src="{{url_for('static', filename='solver.js')}}"></script>
     <script src="{{url_for('static', filename='game.js')}}"></script>
     <script src="{{url_for('static', filename='index.js')}}"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/github");
+        editor.getSession().setMode("ace/mode/javascript");
+    </script>
   </body>
 </html>
