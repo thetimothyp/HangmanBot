@@ -1,5 +1,5 @@
 # HangmanBot
-Challenge these bots in the classic game of hangman! (Don't worry, at least one of them is really dumb).
+Challenge these bots in the classic game of hangman, or write your own bot to see how it measures up! (Don't worry, at least one of them is really dumb).
 
 #### Play the game at: https://hangmanbot-app.herokuapp.com/
 ---------------------
