@@ -35,9 +35,9 @@ class Game {
 		return this.is_win() || this.is_loss();
 	}
 
-	run_with_solver(s) {
+	run_with_solver(s, word_list) {
 		while (!this.game_over()) {
-			this.guess(s.make_guess(this.state.guessed, this.state));
+			this.guess(s.make_guess(this.state.guessed, this.state, word_list));
 		}
 		return this.results;
 	}

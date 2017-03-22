@@ -8,7 +8,7 @@ class Solver {
 		return word_list.filter((word) => word.length == this.word_length);
 	}
 
-	make_guess(guessed, state) {
+	make_guess(guessed, state, word_list) {
 		/* Implement in subclass */
 	}
 }
@@ -20,10 +20,9 @@ class CustomSolver extends Solver {
 	 */
 	constructor(word_length, word_list) {
 		super(word_length, word_list);
-		/* Initialize any instance variables you need to here */
 	}
 
-	make_guess(guessed, state) {
+	make_guess(guessed, state, word_list) {
 		/* Implement your make_guess method here */
 		return '_';
 	}

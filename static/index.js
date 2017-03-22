@@ -5,7 +5,7 @@ $(function(){
     editor.getSession().setMode("ace/mode/javascript");
 	// const socket = io.connect($(location).attr('href'));
 
-	let userBot;
+	let userBot = editor.getValue();
 	let game;
 
 	const display_word = (word) => {
@@ -61,10 +61,11 @@ $(function(){
 		data = JSON.parse(data);
 		game = new Game(data['word'], data['max_guesses']);
 		s = new CustomSolver(data['word_length'], data['word_list']);
-		s.make_guess = (guessed, state) => {
-			return eval(userBot);
+		s.make_guess = (guessed, state, word_list) => {
+			let guess = eval('(function(){' + userBot + '}())');
+			return guess;
 		}
-		game.run_with_solver(s);
+		game.run_with_solver(s, data['word_list']);
 	})
 
 	$("#play").on('click', () => {
