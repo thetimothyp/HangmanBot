@@ -10,42 +10,39 @@ hangman.
 
 ## Creating a bot
 Creating a hangman-solving bot is super easy to do. To write a bot, simply click the `Write a Bot` button and
-define your `make_guess` method in the modal that pops up. All you have to do is make sure that the method returns
-a single character value as its guess, and the game loop will take care of processing the guess for you.
+define your implementation of the CustomSolver class. All you have to do is make sure that your make_guess() method
+returns a single character value upon its invocation, and the game loop will use your class to try and guess the
+hangman word.
 
 For example, if we want to implement a bot that guesses a random letter every turn, we simply fill in the modal like so:
 ```javascript
-/*
----------------------
-DO NOT UNCOMMENT
----------------------
 class CustomSolver extends Solver {
- 
-// Your make_guess() method should return a single letter guess.
-// Feel free to define any helper methods you need to.
+  /* 
+    Your make_guess() method should return a single letter guess.
+   */
+  constructor(word_length, word_list) {
+    super(word_length, word_list);
+    /* Initialize any instance variables you need to here */
+  }
 
-// Implement your make_guess method here
-  make_guess(guessed, state, word_list) { 
-*/
-    
-    // Implement helper methods if you need to
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
+  make_guess(guessed, state) {
+    /* Implement your make_guess method here */
 
     // Example: guess a random letter every time
-    return 'abcdefghijklmnopqrstuvxyz'[getRandomInt(0, 26)];
+    return 'abcdefghijklmnopqrstuvxyz'[this.getRandomInt(0, 26)];
+  }
 
-/*
-  } end make_guess
-*/
+  /* Feel free to define any helper methods you may need */
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+}
 ```
 
 ### Current limitations
 * If you look at the class declaration syntax, it's in JavaScript, not Python. This is done intentionally to avoid running user submitted code on the server (your code runs in your browser, so if you're trying to be malicious, the only person you can hurt is yourself). However, as a result, your bot's logic MUST be written in JavaScript for the time being. I'm looking into client-side interpreters for other languages, but execution speed is a definite issue here.
-* Currently, you can only implement the make_guess() method of the CustomSolver class. The method has access to all the resources you'd need to develop an effective heuristic (AFAIK), and you can define any helper methods using those resources that you need inside the make_guess() method itself. HOWEVER, I realize that sometimes you'll want to have instance variables for your solver just to make your life easier. I'm working on redoing the code submission so that you can implement the whole CustomSolver class, rather than just a single method.
 
 ## Running the game locally
 ### Setting up your database (in server.py)
