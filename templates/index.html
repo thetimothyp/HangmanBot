@@ -44,32 +44,29 @@
       <!-- Modal content -->
       <div class="modal-content">
         <p>
-        <div id="editor">/*
----------------------
-DO NOT UNCOMMENT
----------------------
-class CustomSolver extends Solver {
- 
-// Your make_guess() method should return a single letter guess.
-// Feel free to define any helper methods you need to.
+        <div id="editor">class CustomSolver extends Solver {
+  /* 
+    Your make_guess() method should return a single letter guess.
+   */
+  constructor(word_length, word_list) {
+    super(word_length, word_list);
+    /* Initialize any instance variables you need to here */
+  }
 
-// Implement your make_guess method here
-  make_guess(guessed, state, word_list) { 
-*/
-    
-    // Implement helper methods if you need to
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
+  make_guess(guessed, state) {
+    /* Implement your make_guess method here */
 
     // Example: guess a random letter every time
-    return 'abcdefghijklmnopqrstuvxyz'[getRandomInt(0, 26)];
+    return 'abcdefghijklmnopqrstuvxyz'[this.getRandomInt(0, 26)];
+  }
 
-/*
-  } end make_guess
-*/</div>
+  /* Feel free to define any helper methods you may need */
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+}</div>
         <button id="confirm-code">OKAY</button>
       </div>
 

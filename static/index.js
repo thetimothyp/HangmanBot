@@ -60,11 +60,8 @@ $(function(){
 	socket.on('new_game', (data) => {
 		data = JSON.parse(data);
 		game = new Game(data['word'], data['max_guesses']);
+		let CustomSolver = eval('(function(){' + userBot + 'return CustomSolver}())');
 		s = new CustomSolver(data['word_length'], data['word_list']);
-		s.make_guess = (guessed, state, word_list) => {
-			let guess = eval('(function(){' + userBot + '}())');
-			return guess;
-		}
 		game.run_with_solver(s, data['word_list']);
 	})
 

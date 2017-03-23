@@ -37,7 +37,7 @@ class Game {
 
 	run_with_solver(s, word_list) {
 		while (!this.game_over()) {
-			this.guess(s.make_guess(this.state.guessed, this.state, word_list));
+			this.guess(s.make_guess(this.state.guessed, this.state));
 		}
 		return this.results;
 	}
